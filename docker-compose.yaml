@@ -1,0 +1,36 @@
+version: "3.8"
+
+
+services:
+  server:
+    build: "./nginx"
+    networks:
+      - "foodtrucks_net"
+    ports:
+      - "8080:80"
+    depends_on:
+      - "foodtrucks"
+    restart: "on-failure:5"
+
+  foodtrucks: 
+    build: "./flask-app"
+    networks:
+      - "foodtrucks_net"
+    expose:
+      - "5000"
+    depends_on:
+      - "es"
+
+  es:
+    image: "elasticsearch:6.8.18"
+    networks:
+      - "foodtrucks_net"
+    environment:
+      - "discovery.type=single-node"
+    expose:
+      - "9200"
+      - "9300"
+
+
+networks:
+  foodtrucks_net:
