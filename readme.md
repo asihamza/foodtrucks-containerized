@@ -8,7 +8,8 @@ the app from an nginx server - making it a 3-tier app.
 To run this project, make sure you have the latest docker and docker-compose versions.
 Clone the project, cd into the main directory, then run the following command:
 
-> docker-compose up -d
+> docker-compose up -d  
+> curl localhost:8080 # or in your browser, visit localhost:8080
 
 ## The three parts of the project:
 
